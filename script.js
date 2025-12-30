@@ -30,3 +30,47 @@ next.addEventListener("click", function(e) {
   }
   change_slide();
 });
+
+// Product Carousel
+const productScroll = document.querySelector(".product-scroll");
+const btnLeft = document.querySelector(".carousel-btn-left");
+const btnRight = document.querySelector(".carousel-btn-right");
+
+btnLeft.addEventListener("click", function() {
+  productScroll.scrollBy({
+    left: -280,
+    behavior: "smooth"
+  });
+});
+
+btnRight.addEventListener("click", function() {
+  productScroll.scrollBy({
+    left: 280,
+    behavior: "smooth"
+  });
+});
+
+// Multiple Carousels Handler
+const carouselButtons = document.querySelectorAll('[data-carousel]');
+
+carouselButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    const carouselId = this.getAttribute('data-carousel');
+    const scrollContainer = document.querySelector(`[data-scroll="${carouselId}"]`);
+    const direction = this.classList.contains('carousel-btn-left') ? -280 : 280;
+    
+    scrollContainer.scrollBy({
+      left: direction,
+      behavior: 'smooth'
+    });
+  });
+});
+
+// Smooth scroll to top
+document.querySelector('.footer-top a').addEventListener('click', function(e) {
+  e.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
